@@ -20,5 +20,23 @@ export function Tag(props) {
     } else {
         return template;
     }
+}
 
+export const firebaseLooper = (snapshot) => {
+    const data = [];
+    snapshot.forEach((childSnapshot) => {
+        data.push({
+            ...childSnapshot.val(),
+            id: childSnapshot.key
+        })
+    });
+    return data;
+}
+
+export const reverseArray = (array) => {
+    let revArray = [];
+    for (let i = array.length - 1; i >= 0; i--) {
+        revArray.push(array[i]);
+    }
+    return revArray;
 }

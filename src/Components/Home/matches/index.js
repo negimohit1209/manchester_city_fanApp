@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tag } from '../../UI/minc';
+import Blocks from './blocks';
 
 export default function MatchesHome() {
     return (
@@ -10,7 +11,7 @@ export default function MatchesHome() {
                     size="50px"
                     color="#ffffff"
                 >Matches</Tag>
-                MATCHES
+                <Blocks />
                 <Tag
                     bck="#ffffff"
                     size="22px"
