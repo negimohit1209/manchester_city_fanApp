@@ -2,24 +2,32 @@ import React, { Component } from 'react';
 import Reveal from 'react-reveal/Reveal';
 import Stripes from '../../../Resources/images/stripes.png';
 import { Tag } from '../../UI/minc';
+import HomeCards from './cards';
 
 
 export default class MeetPlayers extends Component {
 
     state = {
-
+        show: false
     }
     render() {
         return (
-            <Reveal>
+            <Reveal
+                fraction={0.7}
+                onReveal={() => {
+                    console.log("resdfas");
+                    this.setState({
+                        show: true
+                    })
+                }} >
                 <div className='home_meetplayers'
                     style={{ background: `#ffffff url(${Stripes})` }}
                 >
                     <div className="container">
                         <div className="home_meetplayers_wrapper">
                             <div className="home_card_wrapper">
-                                card
-                        </div>
+                                <HomeCards show={this.state.show} />
+                            </div>
                             <div className="home_text_wrapper">
                                 <div>
                                     <Tag bck='#0e1731' size="100px" color='#ffffff' add={{
@@ -57,7 +65,7 @@ export default class MeetPlayers extends Component {
                     </div >
 
                 </div >
-            </Reveal>
+            </Reveal >
         )
     }
 }
