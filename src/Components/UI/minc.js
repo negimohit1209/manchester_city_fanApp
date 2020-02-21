@@ -49,5 +49,11 @@ export const validate = element => {
     const message = !valid ? 'this field is required' : '';
     error = [valid, message];
   }
+  if (element.validation.email) {
+    const valid = /\S+@\S+\.\S+/.test(element.value);
+    const message = !valid ? 'Must be a valid email' : '';
+    error = [valid, message];
+  }
+  console.log(error);
   return error;
 };
