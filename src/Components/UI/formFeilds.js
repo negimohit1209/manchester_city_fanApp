@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function FormFeilds({ formData, id }) {
+export default function FormFeilds({ formData, id, change }) {
   const renderTemplate = () => {
     let formTemplate = null;
     switch (formData.element) {
@@ -10,7 +10,7 @@ export default function FormFeilds({ formData, id }) {
             <input
               {...formData.config}
               value={formData.value}
-              onChange={event => change}
+              onChange={event => change({ event, id })}
             />
           </div>
         );
