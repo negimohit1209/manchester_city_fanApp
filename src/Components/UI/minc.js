@@ -54,6 +54,5 @@ export const validate = element => {
     const message = !valid ? 'Must be a valid email' : '';
     error = [valid, message];
   }
-  console.log(error);
   return error;
 };

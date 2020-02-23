@@ -3,6 +3,7 @@ import Fade from 'react-reveal/Fade';
 
 import FormFeilds from '../../UI/formFeilds';
 import { validate } from '../../UI/minc';
+import { firebasePromotions } from '../../../firebase';
 
 export default class Enroll extends Component {
   state = {
@@ -15,7 +16,7 @@ export default class Enroll extends Component {
         config: {
           name: 'email_input',
           type: 'email',
-          placeHolder: 'Enter Your email'
+          placeholder: 'Enter Your email'
         },
         validation: {
           required: true,
@@ -26,6 +27,29 @@ export default class Enroll extends Component {
       }
     }
   };
+
+  resetFormSuccess(type) {
+    const newFormdata = { ...this.state.formData };
+    for (let key in newFormdata) {
+      newFormdata[key].value = '';
+      newFormdata[key].valid = false;
+      newFormdata[key].validationMessage = '';
+    }
+    this.setState({
+      formError: false,
+      formData: newFormdata,
+      formSuccess: type
+        ? 'Congratulations'
+        : 'Email already exists in the database'
+    });
+    this.successMessage();
+  }
+
+  successMessage() {
+    setTimeout(() => {
+      this.setState({ formSuccess: '' });
+    }, 2000);
+  }
 
   updateForm(element) {
     const newFormdata = { ...this.state.formData };
@@ -48,7 +72,18 @@ export default class Enroll extends Component {
     }
 
     if (formIsValid) {
-      console.log(dataToSubmit);
+      firebasePromotions
+        .orderByChild('email')
+        .equalTo(dataToSubmit.email)
+        .once('value')
+        .then(snapshot => {
+          if (snapshot.val() == null) {
+            firebasePromotions.push(dataToSubmit);
+            this.resetFormSuccess(true);
+          } else {
+            this.resetFormSuccess(false);
+          }
+        });
     } else {
       this.setState({
         formError: true
@@ -70,6 +105,7 @@ export default class Enroll extends Component {
               {this.state.formError ? (
                 <div className="error_label">Something is wrong try again</div>
               ) : null}
+              <div className="success_label">{this.state.formSuccess}</div>
               <button onClick={event => this.submitForm(event)}>Submit</button>
             </div>
           </form>
