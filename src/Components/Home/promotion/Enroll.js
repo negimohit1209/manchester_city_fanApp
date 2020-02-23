@@ -106,7 +106,7 @@ export default class Enroll extends Component {
                 <div className="error_label">Something is wrong try again</div>
               ) : null}
               <div className="success_label">{this.state.formSuccess}</div>
-              <button onClick={event => this.submitForm(event)}>Submit</button>
+              <button onClick={event => this.submitForm(event)}>Enroll</button>
             </div>
           </form>
         </div>
