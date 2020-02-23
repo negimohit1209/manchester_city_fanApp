@@ -54,6 +54,7 @@ export default class SignIn extends Component {
         .auth()
         .signInWithEmailAndPassword(dataToSubmit.email, dataToSubmit.password)
         .then(() => {
+          console.log('mohit si s');
           this.props.history.push('/dashboard');
         })
         .catch(() => {
@@ -61,18 +62,6 @@ export default class SignIn extends Component {
             formError: true
           });
         });
-      //   firebasePromotions
-      //     .orderByChild('email')
-      //     .equalTo(dataToSubmit.email)
-      //     .once('value')
-      //     .then(snapshot => {
-      //       if (snapshot.val() == null) {
-      //         firebasePromotions.push(dataToSubmit);
-      //         this.resetFormSuccess(true);
-      //       } else {
-      //         this.resetFormSuccess(false);
-      //       }
-      //     });
     } else {
       this.setState({
         formError: true
