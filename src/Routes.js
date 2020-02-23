@@ -4,13 +4,20 @@ import Layout from './Hoc/Layout';
 import Home from './Components/Home';
 import SignIn from './Components/SignIn';
 
+import PrivateRoute from './Components/authroutes/privateroute';
+
 import Dashboard from './Components/admin/Dashboard';
 
 const Routes = props => {
   return (
     <Layout>
       <Switch>
-        <Route exact component={Dashboard} path="/dashboard" />
+        <PrivateRoute
+          {...props}
+          path="/dashboard"
+          exact
+          component={Dashboard}
+        />
         <Route exact component={SignIn} path="/signin" />
         <Route exact component={Home} path="/" />
       </Switch>
