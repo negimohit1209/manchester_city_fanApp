@@ -8,7 +8,7 @@
     "eqeqeq": "error",
     "func-call-spacing": "error",
     "indent": [
-      "error",
+      "warn",
       2,
       {
         "SwitchCase": 1
