@@ -118,6 +118,46 @@ export default class AddEditMatch extends Component {
         valid: false,
         validationMessage: '',
         showlabel: true
+      },
+      result: {
+        element: 'select',
+        value: '',
+        config: {
+          label: 'Team results',
+          name: 'select_result',
+          type: 'select',
+          options: [
+            { key: 'W', value: 'W' },
+            { key: 'L', value: 'L' },
+            { key: 'D', value: 'D' },
+            { key: 'n/a', value: 'n/a' }
+          ]
+        },
+        validation: {
+          required: true
+        },
+        valid: false,
+        validationMessage: '',
+        showlabel: true
+      },
+      final: {
+        element: 'select',
+        value: '',
+        config: {
+          label: 'Game Played ?',
+          name: 'select_played ',
+          type: 'select',
+          options: [
+            { key: 'Yes', value: 'Yes' },
+            { key: 'No', value: 'No' }
+          ]
+        },
+        validation: {
+          required: true
+        },
+        valid: false,
+        validationMessage: '',
+        showlabel: true
       }
     }
   };
@@ -182,6 +222,27 @@ export default class AddEditMatch extends Component {
                   formData={this.state.formData.stadium}
                   change={element => this.updateForm(element)}
                 />
+              </div>
+              <div className="split_fields last">
+                <FormFeilds
+                  id="result"
+                  formData={this.state.formData.result}
+                  change={element => this.updateForm(element)}
+                />
+                <FormFeilds
+                  id="final"
+                  formData={this.state.formData.final}
+                  change={element => this.updateForm(element)}
+                />
+              </div>
+              <div className="success_label">{this.state.formSuccess}</div>
+              {this.state.formError ? (
+                <div className="error_label">Something went wrong</div>
+              ) : null}
+              <div className="admin_submit">
+                <button onClick={event => this.submitForm(event)}>
+                  {this.state.formType}
+                </button>
               </div>
             </form>
           </div>
